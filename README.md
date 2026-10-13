@@ -1,32 +1,30 @@
-# React + TypeScript + Vite
+# Gestor de Tareas - MateCode
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+SPA de gestión de tareas con React + TypeScript, Firebase (Auth + Firestore), AWS SES vía Vercel Functions y deploy en Vercel.
 
-Currently, two official plugins are available:
+> Estado actual: solo setup inicial. Sin login, sin CRUD y sin envío de emails todavía.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Descripción
 
-## React Compiler
+## Decisiones arquitectónicas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Instalación
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+cd gestor-tareas-matecode
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Variables de entorno
+
+Copiar `.env.example` a `.env` y completar valores (no commitear `.env`):
+
+- `VITE_FIREBASE_*`: configuración pública de Firebase para el cliente.
+- `AWS_*`, `SES_FROM_EMAIL`: credenciales solo servidor para Vercel Functions en `/api`.
+
+## URL de producción
+
+## Flujo de envío de emails
+
+## Uso de IA en el proceso
