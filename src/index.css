@@ -109,7 +109,7 @@ body {
   color: #2563eb;
 }
 
-.home-page {
+.centered-page {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -120,12 +120,12 @@ body {
   text-align: center;
 }
 
-.home-page h1 {
+.centered-page h1 {
   margin: 0;
   font-size: 1.5rem;
 }
 
-.home-page p {
+.centered-page p {
   margin: 0;
 }
 

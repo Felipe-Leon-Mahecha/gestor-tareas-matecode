@@ -29,7 +29,7 @@ export function Home() {
   }
 
   return (
-    <main className="home-page">
+    <main className="centered-page">
       <h1>Gestor de Tareas - MateCode</h1>
 
       {loading ? (
