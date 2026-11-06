@@ -2,7 +2,7 @@
 
 SPA de gestión de tareas con React + TypeScript, Firebase (Auth + Firestore), AWS SES vía Vercel Functions y deploy en Vercel.
 
-> Estado actual: autenticación con email/Google y formularios de login/registro. Sin CRUD de tareas, rutas protegidas ni envío de emails todavía.
+> Estado actual: autenticación con email/Google, rutas protegidas y página de tareas vacía. Sin CRUD de tareas ni envío de emails todavía.
 
 ## Descripción
 
