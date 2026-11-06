@@ -109,6 +109,26 @@ body {
   color: #2563eb;
 }
 
+.home-page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.home-page h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.home-page p {
+  margin: 0;
+}
+
 @media (min-width: 480px) {
   .auth-card {
     padding: 2rem;
