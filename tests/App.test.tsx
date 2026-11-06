@@ -4,7 +4,7 @@ import App from '../src/App'
 import { AuthProvider } from '../src/features/auth/AuthContext'
 
 describe('App', () => {
-  it('muestra el título del gestor', () => {
+  it('redirige al login cuando no hay sesión', async () => {
     render(
       <AuthProvider>
         <App />
@@ -12,7 +12,7 @@ describe('App', () => {
     )
 
     expect(
-      screen.getByRole('heading', { name: /gestor de tareas/i }),
+      await screen.findByRole('heading', { name: /iniciar sesión/i }),
     ).toBeInTheDocument()
   })
 })
