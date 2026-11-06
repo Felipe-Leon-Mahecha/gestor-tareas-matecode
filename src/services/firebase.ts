@@ -12,7 +12,7 @@ type FirebaseEnvKey =
 
 const missingEnvKeys: FirebaseEnvKey[] = []
 
-// Lee una variable y acumula las que faltan para reportarlas todas juntas.
+// Acumula las variables ausentes para reportarlas todas en un solo error.
 function readEnv(key: FirebaseEnvKey): string {
   const value = (import.meta.env as unknown as Record<string, unknown>)[key]
 
@@ -42,6 +42,5 @@ if (missingEnvKeys.length > 0) {
 
 const app = initializeApp(firebaseConfig)
 
-// Instancias compartidas: Auth para el login y Firestore para el CRUD de tareas.
 export const auth = getAuth(app)
 export const db = getFirestore(app)

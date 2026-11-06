@@ -23,7 +23,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setLoading(false)
     })
 
-    // Limpieza: evita suscripciones duplicadas (StrictMode monta/desmonta en dev).
+    // Evita suscripciones duplicadas: StrictMode monta y desmonta el efecto en desarrollo.
     return unsubscribe
   }, [])
 

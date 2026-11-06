@@ -10,7 +10,7 @@ import {
 import type { AuthUser } from '../types/auth'
 import { auth } from './firebase'
 
-// Convierte el User de Firebase al tipo propio para no filtrar el SDK al resto de la app.
+// Adapta el User de Firebase a AuthUser para no filtrar el SDK al resto de la aplicación.
 function toAuthUser(user: User): AuthUser {
   return {
     uid: user.uid,

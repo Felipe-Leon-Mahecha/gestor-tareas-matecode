@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 
-# Env files - never commit real secrets
+# Variables de entorno
 .env
 .env.local
 .env.*.local
