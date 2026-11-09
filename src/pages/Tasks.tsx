@@ -5,6 +5,8 @@ import { TaskList } from '../components/TaskList'
 import { useAuth } from '../hooks/useAuth'
 import { useTasks } from '../hooks/useTasks'
 import { logout } from '../services/auth'
+import { sendSummaryEmail } from '../services/email'
+import { buildSummary } from '../utils/summary'
 import { getAuthErrorMessage } from '../utils/authErrors'
 
 export function Tasks() {
@@ -13,6 +15,9 @@ export function Tasks() {
     useTasks()
   const [loggingOut, setLoggingOut] = useState(false)
   const [logoutError, setLogoutError] = useState('')
+  const [sendingSummary, setSendingSummary] = useState(false)
+  const [summarySuccess, setSummarySuccess] = useState('')
+  const [summaryError, setSummaryError] = useState('')
 
   async function handleLogout() {
     if (loggingOut) {
@@ -27,6 +32,28 @@ export function Tasks() {
       setLogoutError(getAuthErrorMessage(logoutFailure))
     } finally {
       setLoggingOut(false)
+    }
+  }
+
+  async function handleSendSummary() {
+    if (sendingSummary) {
+      return
+    }
+
+    setSendingSummary(true)
+    setSummarySuccess('')
+    setSummaryError('')
+    try {
+      await sendSummaryEmail(buildSummary(tasks))
+      setSummarySuccess('Te enviamos el resumen de tus tareas por email.')
+    } catch (summaryFailure) {
+      setSummaryError(
+        summaryFailure instanceof Error
+          ? summaryFailure.message
+          : 'No se pudo enviar el resumen. Inténtalo de nuevo.',
+      )
+    } finally {
+      setSendingSummary(false)
     }
   }
 
@@ -63,6 +90,29 @@ export function Tasks() {
       )}
 
       <TaskForm onSubmit={addTask} />
+
+      <section className="task-summary">
+        <Button
+          type="button"
+          className="button--secondary"
+          onClick={handleSendSummary}
+          loading={sendingSummary}
+          loadingText="Enviando..."
+        >
+          Enviarme resumen por email
+        </Button>
+
+        {summarySuccess && (
+          <p className="form-success" role="status">
+            {summarySuccess}
+          </p>
+        )}
+        {summaryError && (
+          <p className="form-error" role="alert">
+            {summaryError}
+          </p>
+        )}
+      </section>
 
       {loading ? (
         <p className="status-text">Cargando tareas...</p>

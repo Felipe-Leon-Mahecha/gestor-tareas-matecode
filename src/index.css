@@ -77,6 +77,18 @@ body {
   font-size: 0.875rem;
 }
 
+.form-success {
+  margin: 0;
+  color: #027a48;
+  font-size: 0.875rem;
+}
+
+.task-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .button {
   padding: 0.65rem 0.9rem;
   font: inherit;
