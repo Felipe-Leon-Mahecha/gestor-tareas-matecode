@@ -24,6 +24,8 @@ export async function sendEmail({ to, subject, html }: SendEmailInput): Promise<
   })
 
   if (!response.ok) {
-    throw new Error(`Resend respondió con estado ${response.status}`)
+    // El detalle de Resend se registra solo en el servidor para diagnosticar.
+    const detail = await response.text()
+    throw new Error(`Resend respondió con estado ${response.status}: ${detail}`)
   }
 }
