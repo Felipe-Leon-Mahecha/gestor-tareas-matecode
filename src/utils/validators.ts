@@ -33,6 +33,15 @@ export function validatePassword(password: string): string | undefined {
   return undefined
 }
 
+// Compartida por TaskForm y TaskItem: la misma regla de negocio en un solo lugar.
+export function validateTaskTitle(title: string): string | undefined {
+  if (title.trim() === '') {
+    return 'El título es obligatorio.'
+  }
+
+  return undefined
+}
+
 export function validateLoginForm(
   values: LoginFormValues,
 ): FormErrors<LoginFormValues> {
