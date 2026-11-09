@@ -1,6 +1,9 @@
 import type { IncomingMessage, ServerResponse } from 'http'
-import { sendEmail } from './_lib/email'
-import { validateSummaryPayload } from '../src/utils/summary'
+import { sendEmail } from './_lib/email.js'
+import {
+  validateSummaryPayload,
+  type SummaryPayload,
+} from './_lib/validation.js'
 
 interface ApiRequest extends IncomingMessage {
   body?: unknown
@@ -77,12 +80,7 @@ function escapeHtml(value: string): string {
     .replace(/'/g, '&#39;')
 }
 
-function buildEmailHtml(summary: {
-  total: number
-  completed: number
-  pending: number
-  titles: string[]
-}): string {
+function buildEmailHtml(summary: SummaryPayload): string {
   const items = summary.titles.map((title) => `<li>${escapeHtml(title)}</li>`).join('')
   return `<!DOCTYPE html><html><body><h2>Resumen de tus tareas</h2><p>Total: ${summary.total} · Completadas: ${summary.completed} · Pendientes: ${summary.pending}</p><ul>${items}</ul></body></html>`
 }
