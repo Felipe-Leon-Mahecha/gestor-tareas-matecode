@@ -104,7 +104,9 @@ export default async function handler(
   let email: string
   try {
     email = await verifyIdToken(token)
-  } catch {
+  } catch (verificationError) {
+    // El log queda solo en el servidor: al cliente no se le filtran detalles.
+    console.error('send-summary: fallo al verificar el token', verificationError)
     sendJson(res, 401, { error: 'Token inválido o expirado.' })
     return
   }
@@ -125,8 +127,9 @@ export default async function handler(
       html: buildEmailHtml(summary),
     })
     sendJson(res, 200, { ok: true })
-  } catch {
+  } catch (sendError) {
     // No se filtran detalles internos ni claves al cliente.
+    console.error('send-summary: fallo el proveedor de email', sendError)
     sendJson(res, 502, { error: 'No se pudo enviar el email. Inténtalo de nuevo.' })
   }
 }
