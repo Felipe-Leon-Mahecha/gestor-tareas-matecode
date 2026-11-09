@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import {
-  buildSummary,
-  validateSummaryPayload,
-} from '../src/utils/summary'
+import { validateSummaryPayload } from '../api/_lib/validation'
+import { buildSummary } from '../src/utils/summary'
 import type { Task } from '../src/types/task'
 
 const tasks: Task[] = [
