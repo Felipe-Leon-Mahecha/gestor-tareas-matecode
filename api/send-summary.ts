@@ -44,7 +44,9 @@ async function verifyIdToken(token: string): Promise<string> {
   )
 
   if (!response.ok) {
-    throw new Error('Token inválido.')
+    // El detalle solo se registra en el servidor para poder diagnosticar.
+    const detail = await response.text()
+    throw new Error(`Token inválido (${response.status}): ${detail}`)
   }
 
   const data: unknown = await response.json()
