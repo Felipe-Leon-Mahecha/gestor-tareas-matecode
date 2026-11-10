@@ -132,6 +132,22 @@ export default async function handler(
   } catch (sendError) {
     // No se filtran detalles internos ni claves al cliente.
     console.error('send-summary: fallo el proveedor de email', sendError)
-    sendJson(res, 502, { error: 'No se pudo enviar el email. Inténtalo de nuevo.' })
+    sendJson(res, 502, {
+      error: 'No se pudo enviar el email. Inténtalo de nuevo.',
+      reason: classifyEmailError(sendError),
+    })
   }
+}
+
+// Código corto y sin secretos para diagnosticar el fallo desde el navegador.
+function classifyEmailError(error: unknown): string {
+  const message = error instanceof Error ? error.message : ''
+  const status = message.match(/Resend respondió con estado (\d{3})/)
+  if (status !== null) {
+    return `provider_${status[1]}`
+  }
+  if (message.includes('no configurada')) {
+    return 'missing_config'
+  }
+  return 'provider_unreachable'
 }
