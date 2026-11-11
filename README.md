@@ -254,4 +254,30 @@ El envío está aislado en `api/_lib/email.ts`: esa función recibe `to`, `subje
 
 ## Uso de IA en el proceso de trabajo
 
-(sección en redacción)
+Usé dos herramientas de IA con roles distintos:
+
+- **Claude** como tutor: me guió paso a paso, me explicó los conceptos antes de implementarlos, me ayudó a redactar los prompts y a revisar cada entrega contra la consigna y la rúbrica.
+- **OpenCode** como asistente de código dentro del repositorio, ejecutando prompts acotados que yo le daba.
+
+Gran parte del código fue generado con OpenCode (65% apx) a partir de esos prompts, por lo que mi trabajo estuvo en dirigir, revisar, probar y entender. Mi registro de prompts y aprendizajes está en la carpeta `Uso de ia/`.
+
+### Qué hice yo
+- Creé y configuré el proyecto de Firebase (Authentication y Firestore en modo producción), y publiqué las reglas de seguridad en la consola.
+- Configuré las variables de entorno locales y en Vercel, y desplegué la aplicación.
+- Intenté crear la cuenta de AWS para SES; al no poder verificar la tarjeta, tomé la decisión de usar Resend y la documenté.
+- Probé manualmente el flujo completo en producción, incluyendo la prueba con dos usuarios para comprobar que las reglas de Firestore aíslan los datos.
+- Estudié el código con ejercicios de comprobación (por ejemplo, cómo cambian `user` y `loading` en `AuthContext` y para qué sirve la función de limpieza del `useEffect`).
+
+### En qué situaciones fue más efectiva
+- Generar la estructura base y código repetitivo (formularios, componentes, tests) siguiendo una arquitectura por capas.
+- Explicar conceptos nuevos para mí: `onAuthStateChanged` y el patrón Observer, la limpieza de suscripciones, las reglas de Firestore y el mocking con Vitest.
+
+### Patrones y buenas prácticas que descubrí
+1. **Pedir la explicación de cada decisión junto con el código**, para poder defenderla después.
+2. **Prompts acotados con reglas explícitas**: alcance de la tarea, sin `any`, commits semánticos, no leer el `.env`.
+3. **Revisar siempre lo generado contra la consigna.** Ejemplo real: el primer modelo `Task` no tenía `userId` ni `description`; al compararlo con la consigna lo corregí antes de seguir. Otro: la IA afirmó que el `userId` del servicio protegía los datos, y lo corregí: la protección real son las reglas de Firestore, que se ejecutan en el servidor.
+4. **Probar a mano lo que la IA dice que funciona**, en especial la seguridad.
+5. **Mockear los servicios externos** para que los tests no dependan de Firebase ni del `.env`.
+
+### Qué aprendí sobre trabajar con IA
+La IA acelera mucho, pero no reemplaza entender el código: lo que no entiendo, lo estudio antes de darlo por bueno. Para mí lo más valioso fue usarla como tutora, no solo como generadora de código.
