@@ -257,7 +257,7 @@ El envío está aislado en `api/_lib/email.ts`: esa función recibe `to`, `subje
 Usé dos herramientas de IA con roles distintos:
 
 - **Claude** como tutor: me guió paso a paso, me explicó los conceptos antes de implementarlos, me ayudó a redactar los prompts y a revisar cada entrega contra la consigna y la rúbrica.
-- **OpenCode** como asistente de código dentro del repositorio, ejecutando prompts acotados que yo le daba.
+- **OpenCode (con el modelo DeepSeek V4 Flash)** como asistente de código dentro del repositorio, ejecutando prompts acotados que yo le daba.
 
 Gran parte del código fue generado con OpenCode (65% apx) a partir de esos prompts, por lo que mi trabajo estuvo en dirigir, revisar, probar y entender. Mi registro de prompts y aprendizajes está en la carpeta `Uso de ia/`.
 
